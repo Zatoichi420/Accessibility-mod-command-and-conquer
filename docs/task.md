@@ -1,0 +1,7 @@
+- [x] Analyze game installations on Steam and Desktop
+- [x] Research screen reader accessibility libraries (Tolk, NVDA Controller Client)
+- [x] Research C&C Remastered C++ source code access
+- [x] Research OpenRA-RA2 C# mod repository
+- [x] Research Red Alert 3 (SAGE engine) closed-source hooking options
+- [x] Draft accessibility implementation plan
+- [x] Create walkthrough.md summarizing the final plan and recommendations
