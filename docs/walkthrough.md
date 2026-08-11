@@ -27,7 +27,7 @@ We have successfully configured, built, and tested the accessibility modificatio
 
 ## 2. Automated Test Suite Execution
 
-We wrote and executed a dedicated Python testing script, [run_accessibility_tests.py](file:///C:/Users/vegas/.gemini/antigravity/brain/649bf951-c992-48aa-97e3-8c5683580d83/scratch/run_accessibility_tests.py), which runs **5 validation checks** for each of the 4 games (20 tests total).
+We wrote and executed a dedicated Python testing script, [run_accessibility_tests.py](file:///C:/Users/vegas/OneDrive/Documentos/GitHub/Accessibility-mod-command-and-conquer/docs/run_accessibility_tests.py), which runs **5 validation checks** for each of the 4 games (20 tests total).
 
 ### Test Suite Results: **20/20 Passed**
 
