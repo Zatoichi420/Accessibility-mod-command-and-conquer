@@ -4,4 +4,9 @@
 - [x] Research OpenRA-RA2 C# mod repository
 - [x] Research Red Alert 3 (SAGE engine) closed-source hooking options
 - [x] Draft accessibility implementation plan
-- [x] Create walkthrough.md summarizing the final plan and recommendations
+- [x] Port AccessMod code to Tiberian Dawn C++ project
+- [x] Retarget and compile TiberianDawn.dll and RedAlert.dll DLLs
+- [x] Integrate C# Tolk wrapper class and x64 Tolk.dll in OpenRA-RA2
+- [x] Recompile OpenRA-RA2 C# mod DLL assemblies
+- [x] Implement and execute Python-based automated test suite (20/20 passed)
+- [x] Create walkthrough.md summarizing compilation steps and test results

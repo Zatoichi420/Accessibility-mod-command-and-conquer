@@ -10,28 +10,11 @@ Our goal is to build screen reader narration, custom keyboard navigation, and ta
 
 ---
 
-## User Review Required
-
-> [!IMPORTANT]
-> **Choose the Preferred Engine for Red Alert 2**
-> * **Option A (Recommended): OpenRA-RA2 (`C:\Users\vegas\OneDrive\Desktop\Games\OpenRA-RA2`)**
->   Written in C# (open-source), it has highly moddable UI, inputs, and game states. This is significantly easier to develop, maintain, and integrate screen-reader features.
-> * **Option B: Original Engine (`gamemd.exe`) via Phobos/Ares DLL Injections**
->   Maintains authentic physics and original game files but requires low-level C++ memory patching and reverse-engineering of closed-source executables.
->
-> **Which engine do you prefer focusing on for Red Alert 2?**
-
-> [!NOTE]
-> **Tiberian Dawn and Red Alert 1 Engine Selection**
-> For Tiberian Dawn and RA1, you have the **C&C Remastered Collection** installed. We have access to the official C++ source code in `CnCRemastered\SOURCECODE`. We propose implementing accessibility directly in these C++ DLLs (`TiberianDawn.dll` / `RedAlert.dll`). Alternatively, we could use **OpenRA**'s default Tiberian Dawn and Red Alert mods. We recommend the Remastered Collection C++ DLL approach since it uses the official modern Steam release.
-
----
-
-## Open Questions
-
-> [!WARNING]
-> **Sound Cues vs. Speech Feedback**
-> RTS games require rapid real-time awareness. Text-to-speech (TTS) might lag during heavy action. Do you prefer a hybrid approach where **spatial sound beacons** (such as stereo-panned sound effects) indicate map details and **speech narration** is reserved for menus, sidebar updates, and query hotkeys?
+## Resolved Decisions
+* **Red Alert 2 Engine:** Option A: **OpenRA-RA2** ([OpenRA-RA2](file:///C:/Users/vegas/OneDrive/Desktop/Games/OpenRA-RA2)) has been chosen. It is written in C# (open-source), has a highly moddable UI/input system, and is significantly easier to integrate screen-reader features.
+* **Tiberian Dawn & Red Alert 1 Engine:** C&C Remastered Collection (C++ source DLLs in [CnCRemastered\SOURCECODE](file:///F:/SteamLibrary/steamapps/common/CnCRemastered/SOURCECODE)). While Tiberian Dawn was originally out of scope in prior planning docs, it has been integrated here per the user's latest request.
+* **Real-time Feedback Approach:** **Hybrid Approach** has been selected. The game will use stereo-panned spatial sound beacons to indicate tactical map details (terrain features, unit movements, combat coordinates), and text-to-speech (TTS) speech narration will be reserved for non-spatial elements (menus, sidebar build queues, query hotkeys).
+* **RA1 Diagnosability Blocker Resolved:** Implemented `AccessMod_Init()` called inside `CNC_Init` (the main DLL loading entry point) for both games. It initializes Tolk and speaks a loader verification message (`"Tiberian Dawn/Red Alert Accessibility Mod Loaded Successfully"`), resolving the lazy-load diagnostics blocker.
 
 ---
 
@@ -102,14 +85,13 @@ We will modify the C# code in your local OpenRA repository:
 
 ---
 
-### 4. C&C Red Alert 3 (External Memory Hook / SageMetaTool)
+### 4. C&C Red Alert 3 (Official Mod SDK Data-Driven Approach)
 
-Since Red Alert 3 is closed-source, we will modify the open-source **SageMetaTool** dll-injector to read/hook the SAGE 2.0 engine in real time.
+To align with the existing project documentation, Red Alert 3 accessibility will be built using the **official Red Alert 3 Mod SDK** (WorldBuilder + XML/W3D data-driven modding). This utilizes officially supported data configuration layers rather than reverse engineering.
 
-#### [MODIFY] [SageMetaTool DLL Source](file:///F:/SteamLibrary/steamapps/common/Command%20and%20Conquer%20Red%20Alert%203)
-* **UI Hooking:** Inject hooks into `RA3.exe`'s drawing engine or UI state structures to read menu lists and sidebar updates.
-* **Process Memory Reader:** Alternatively, build an external C#/Python assistant that polls RA3 process memory for coordinates, selected units, and base stats.
-* **Key Emulation:** Read global keyboard state and translate accessibility hotkeys into mouse actions on the game screen using Windows `SendInput`.
+#### [NEW] [AccessMod_RA3 Mod Files](file:///F:/SteamLibrary/steamapps/common/Command%20and%20Conquer%20Red%20Alert%203)
+* **XML Data Definitions:** Configure SAGE engine XML files to bind custom audio triggers, cues, and keys.
+* **WorldBuilder Scripting:** Script map/scenario triggers to announce key milestones and status transitions.
 
 ---
 

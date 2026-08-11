@@ -62,3 +62,14 @@ void AccessMod_Speak_Vox(int speech_index)
 
 	Tolk_Output(text, false);
 }
+
+void AccessMod_Init()
+{
+	if (!TolkReady) {
+		Tolk_TrySAPI(true);
+		Tolk_PreferSAPI(false);
+		Tolk_Load();
+		TolkReady = true;
+	}
+	Tolk_Output(L"Red Alert Accessibility Mod Loaded Successfully", false);
+}
