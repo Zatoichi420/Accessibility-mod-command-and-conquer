@@ -10,3 +10,10 @@
 - [x] Recompile OpenRA-RA2 C# mod DLL assemblies
 - [x] Implement and execute Python-based automated test suite (20/20 passed)
 - [x] Create walkthrough.md summarizing compilation steps and test results
+- [x] Reconcile scope discrepancies (include Tiberian Dawn, move RA3 to official Mod SDK)
+- [x] Resolve RA1 / Tiberian Dawn lazy loading blocker via CNC_Init startup audio hook
+- [x] Replace Tolk wrapper in OpenRA-RA2 with NVDA Controller Client C# wrappers and x64 dll
+- [x] Set up canonical GitHub repository and push all source files and docs
+- [ ] Test Tiberian Dawn / Red Alert 1 in-game DLL loading via Steam
+- [ ] Implement OpenRA-RA2 keyboard navigation and spatial sound beacons
+- [ ] Develop Red Alert 3 XML/WorldBuilder sound cues and scripting triggers
