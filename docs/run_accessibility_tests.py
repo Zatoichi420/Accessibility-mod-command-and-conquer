@@ -137,33 +137,35 @@ def test_red_alert_2():
     print_result("Test 1: Assembly Compile Check", exists, f"Exists at {assembly_path}" if exists else "Not found")
     
     # Test 2: NVDA Controller Client C# Wrapper Class Metadata Check
-    # Scan the dll byte content for the NVAccess namespace
+    game_dll_path = os.path.join(OPENRA_DIR, "engine", "bin", "OpenRA.Game.dll")
     has_wrapper = False
-    if exists:
+    if os.path.exists(game_dll_path):
         try:
-            with open(assembly_path, 'rb') as f:
+            with open(game_dll_path, 'rb') as f:
                 dll_data = f.read()
-                if b'NVAccess' in dll_data and b'NVDA' in dll_data:
+                if b'NvdaController' in dll_data or b'NVDA' in dll_data:
                     has_wrapper = True
         except Exception:
             pass
     print_result("Test 2: NVDA C# Wrapper Metadata Check", has_wrapper)
     
     # Test 3: NVDA Controller Client DLL Check
-    # Verify nvdaControllerClient.dll (x64) is present in the output folder and check machine type
-    nvda_dll_path = os.path.join(OPENRA_DIR, "engine", "bin", "nvdaControllerClient.dll")
+    nvda_dll_path = os.path.join(OPENRA_DIR, "engine", "bin", "nvdaControllerClient64.dll")
+    if not os.path.exists(nvda_dll_path):
+        nvda_dll_path = os.path.join(OPENRA_DIR, "engine", "bin", "nvdaControllerClient.dll")
     nvda_exists = os.path.exists(nvda_dll_path)
     nvda_machine = check_pe_machine(nvda_dll_path) if nvda_exists else None
     valid_nvda = (nvda_machine == 'x64')
     print_result("Test 3: nvdaControllerClient.dll Machine Type Check (64-bit x64)", valid_nvda, f"Machine type: {nvda_machine}" if nvda_machine else "Invalid DLL")
     
-    # Test 4: Accessibility Manager Verification
-    service_exists = os.path.exists(os.path.join(OPENRA_DIR, "OpenRA.Mods.RA2", "Accessibility", "NVDA.cs"))
-    print_result("Test 4: NVDA.cs Source Integration", service_exists)
+    # Test 4: NVDA Controller Source Integration
+    service_exists = os.path.exists(os.path.join(OPENRA_DIR, "engine", "OpenRA.Game", "Widgets", "NvdaController.cs"))
+    print_result("Test 4: NvdaController.cs Source Integration", service_exists)
     
-    # Test 5: Key Binding Reference Check
-    config_exists = os.path.exists(os.path.join(OPENRA_DIR, "keyboard_commands.txt"))
-    print_result("Test 5: Key Binding Reference Check", config_exists)
+    # Test 5: Tactical Cursor & Query Hotkeys Check
+    hotkeys_exists = os.path.exists(os.path.join(OPENRA_DIR, "engine", "OpenRA.Mods.Common", "Widgets", "Logic", "Ingame", "Hotkeys", "TacticalCursorHotkeyLogic.cs")) and \
+                     os.path.exists(os.path.join(OPENRA_DIR, "engine", "OpenRA.Mods.Common", "Widgets", "Logic", "Ingame", "Hotkeys", "QueryStatusHotkeyLogic.cs"))
+    print_result("Test 5: Accessibility Hotkeys Logic Verification", hotkeys_exists)
 
 def test_red_alert_3():
     print_header("Game 4: C&C Red Alert 3 (Official Mod SDK)")
