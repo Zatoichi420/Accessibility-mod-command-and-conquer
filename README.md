@@ -9,27 +9,36 @@ confirmation of sidebar, unit, and combat information.
 
 | Title | Access | Approach | Status |
 |---|---|---|---|
-| Red Alert (1996) | Full GPLv3 source (EA CnC Remastered Collection) | Engine-level DLL mod (`ra1-accessmod/`) | Built and deployed 4x; in-game speech **not yet confirmed** — see `docs/red-alert-accessibility-project.md` |
+| Red Alert (1996) | Full GPLv3 source (EA CnC Remastered Collection) | Engine-level DLL mod (`ra1-accessmod/`) | Built and deployed 4x; in-game speech **not yet confirmed** — see `ra1-accessmod/README.md` |
 | Red Alert 2 / Yuri's Revenge | No official source | OpenRA-RA2 (separate repo — C# open-source engine fork) | Build system verified working; accessibility integration not yet started |
 | Red Alert 3 / Uprising | No full source, official Mod SDK exists | Data-driven modding via Mod SDK (WorldBuilder, XML/W3D) | Scoping only |
 | Tiberian Dawn | Full GPLv3 source | — | Under discussion — see scope note below |
 
-**Scope note:** the original project doc (`docs/red-alert-accessibility-project.md`) scopes
-this to the Red Alert branch only (RA1/RA2/RA3), explicitly excluding Tiberian Dawn. A newer
-plan (`docs/implementation_plan.md`) proposes including Tiberian Dawn and a DLL-injection
-approach for RA3 rather than the official Mod SDK. These aren't yet reconciled — check both
-docs before assuming either is authoritative.
+**Scope note:** `docs/implementation_plan.md` is the current authoritative plan — it includes
+Tiberian Dawn and proposes a DLL-injection approach for RA3 rather than the official Mod SDK.
+
+## Getting started / testing
+
+**Red Alert (1996) is the only title with a build you can currently test.** Full prerequisites,
+build steps, and mod-activation instructions (including the two most common gotchas — the
+exact Visual Studio toolset flags needed, and Windows' Documents folder frequently being
+OneDrive-redirected) are in **[`ra1-accessmod/README.md`](ra1-accessmod/README.md)**. Read its
+"Status" section too — in-game speech isn't confirmed working yet, so a tester's first useful
+report is simply whether AccessMod shows up and activates under Options → Mods at all.
+
+There's no prebuilt release yet — see "Not included here" below for why, and testers currently
+need the prerequisites in that README (Steam copy of the game, VS2022 Build Tools) to build it
+themselves.
 
 ## Layout
 
-- `docs/` — all planning documents: the original project scope and phased build plan
-  (`red-alert-accessibility-project.md`), a full reconnaissance of RA1's DLL export layer
+- `docs/` — planning documents: a full reconnaissance of RA1's DLL export layer
   (`red-alert-accessibility-recon-inventory.md`), a voice-control command grammar and
-  architecture design (`red-alert-voice-blueprint.md`), and a newer plan/task/walkthrough set
-  produced by Antigravity (`implementation_plan.md`, `task.md`, `walkthrough.md`).
+  architecture design (`red-alert-voice-blueprint.md`), and the current plan/task/walkthrough
+  set (`implementation_plan.md`, `task.md`, `walkthrough.md`).
 - `ra1-accessmod/` — the Red Alert (1996) engine-level mod source: the new files this project
   adds on top of EA's released source, plus the vendored Tolk screen-reader library it depends
-  on. See `ra1-accessmod/README.md` for build/deploy steps and current blocker status.
+  on. See `ra1-accessmod/README.md` for full build/deploy steps and current blocker status.
 - `vendor/NVDAControllerClient/` — the official NVDA Controller Client (DLLs, headers, and
   NV Access's own C# wrapper), staged for the OpenRA-RA2 C# accessibility work. See
   `vendor/NVDAControllerClient/INTEGRATION-NOTES.md` for why this was chosen over Tolk for

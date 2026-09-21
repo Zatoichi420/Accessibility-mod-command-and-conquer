@@ -1,6 +1,6 @@
 # Red Alert Accessibility Mod — Phase 1 Reconnaissance Inventory
 
-Generated 2026-07-06 by a read-only pass over `F:\SteamLibrary\steamapps\common\CnCRemastered\SOURCECODE\RedAlert`. No code was modified during this pass. This is the companion inventory referenced by `red-alert-accessibility-project.md`'s "Reconnaissance Session" step.
+Generated 2026-07-06 by a read-only pass over `F:\SteamLibrary\steamapps\common\CnCRemastered\SOURCECODE\RedAlert`. No code was modified during this pass. This is the companion inventory referenced by `ra1-accessmod/README.md`'s reconnaissance findings.
 
 ## Architectural note
 
